@@ -18,7 +18,7 @@ const questions = [
     ]
   },
   {
-    question: "Which animal is featured in Rwanda's tourism slogan 'Tembera u Rwanda'?",
+    question: "Which animal is featured in Rwanda's tourism ",
     answers: [
       { text: "Elephant", correct: false },
       { text: "Lion", correct: false },
@@ -27,7 +27,7 @@ const questions = [
     ]
   },
   {
-    question: "What is Rwanda's official language alongside English and French?",
+    question: "What is Rwanda's official language ",
     answers: [
       { text: "Zulu", correct: false },
       { text: "Kinyarwanda", correct: true },
@@ -37,3 +37,36 @@ const questions = [
   }
 ];
 
+const questionElement=document.querySelector(".question");
+const answerButton=document.querySelector(".buttons");
+const nextButton=document.querySelector(".next");
+
+let currentQuestionIndex=0;
+let score=0;
+
+function startQuiz(){
+  currentQuestionIndex=0;
+  score=0;
+  nextButton.innerHTML="Next";
+  showQuestion();
+}
+function showQuestion(){
+  resetState();
+  let currentQuestion=questions[currentQuestionIndex];
+  let questionNo=currentQuestionIndex + 1;
+  questionElement.innerHTML=questionNo + ". " + currentQuestion.question;
+
+  currentQuestion.answers.forEach(answer => {
+    const button =document.createElement("button");
+    button.innerHTML=answer.text;
+    button.classList.add("btn");
+    answerButton.appendChild(button);
+  });
+}
+ function resetState(){
+  nextButton.style.display="none";
+  while(answerButton.firstChild){
+    answerButton.removeChild(answerButton.firstChild)
+  }
+ }
+startQuiz();
